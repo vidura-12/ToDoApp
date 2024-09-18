@@ -1,5 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Primary Colors -->
+    <color name="primary">#6200EE</color> <!-- Purple -->
+    <color name="primary_variant">#3700B3</color> <!-- Dark Purple -->
+    <color name="secondary">#03DAC5</color> <!-- Teal -->
+
+    <!-- Background Colors -->
+    <color name="background">#FFFFFF</color> <!-- White -->
+    <color name="surface">#F5F5F5</color> <!-- Light Grey -->
+
+    <!-- Text Colors -->
+    <color name="text_primary">#000000</color> <!-- Black -->
+    <color name="text_secondary">#757575</color> <!-- Grey -->
+
+    <!-- Status Colors -->
+    <color name="success">#4CAF50</color> <!-- Green -->
+    <color name="warning">#FF9800</color> <!-- Orange -->
+    <color name="error">#F44336</color> <!-- Red -->
+
+    <!-- Accent Colors -->
+    <color name="accent">#FF4081</color> <!-- Pink -->
+    <color name="divider">#E0E0E0</color> <!-- Divider Color -->
+
+    <!-- Additional Shades -->
+    <color name="light_blue">#BBDEFB</color> <!-- Light Blue -->
+    <color name="light_green">#C8E6C9</color> <!-- Light Green -->
+    <color name="dark_gray">#212121</color> <!-- Dark Gray -->
 </resources>

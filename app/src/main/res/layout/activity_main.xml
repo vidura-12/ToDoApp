@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -5,80 +6,93 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".MainActivity">
 
     <EditText
         android:id="@+id/taskTitleInput"
-        android:layout_width="0dp"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="48dp"
+        android:background="@drawable/edit_text_background"
         android:hint="Task Title"
         android:inputType="text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/text_primary"
+        android:textColorHint="@color/text_secondary"
         app:layout_constraintBottom_toTopOf="@+id/taskDescriptionInput"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
     <EditText
         android:id="@+id/taskDescriptionInput"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="350dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="52dp"
+        android:background="@drawable/edit_text_background"
         android:hint="Task Description"
         android:inputType="text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/taskTitleInput"
+        android:textColor="@color/text_primary"
+        android:textColorHint="@color/text_secondary"
         app:layout_constraintBottom_toTopOf="@+id/taskDateInput"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/taskDateInput"
-        android:layout_width="0dp"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="48dp"
+        android:background="@drawable/edit_text_background"
         android:hint="Task Date (dd/MM/yyyy)"
-        android:inputType="text"  
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/taskDescriptionInput"
-    app:layout_constraintBottom_toTopOf="@+id/taskTimeInput"
-    android:layout_marginTop="8dp"
-    android:layout_marginBottom="8dp" />
+        android:inputType="text"
+        android:textColor="@color/text_primary"
+        android:textColorHint="@color/text_secondary"
+        app:layout_constraintBottom_toTopOf="@+id/taskTimeInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/taskTimeInput"
-        android:layout_width="0dp"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_background"
         android:hint="Task Time (HH:mm)"
         android:inputType="text"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/taskDateInput"
-    app:layout_constraintBottom_toTopOf="@+id/saveTaskButton"
-    android:layout_marginTop="8dp"
-    android:layout_marginBottom="8dp" />
+        android:textColor="@color/text_primary"
+        android:textColorHint="@color/text_secondary"
+        app:layout_constraintBottom_toTopOf="@+id/saveTaskButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.712" />
 
     <Button
         android:id="@+id/saveTaskButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="246dp"
+        android:layout_height="49dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/primary_variant"
         android:text="Save Task"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/taskTimeInput"
+        android:textColor="@color/background"
         app:layout_constraintBottom_toTopOf="@+id/viewTasksButton"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/viewTasksButton"
-        android:layout_width="match_parent"
+        android:layout_width="246dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="56dp"
+        android:backgroundTint="@color/primary"
         android:text="View Tasks"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/saveTaskButton"
+        android:textColor="@color/background"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginTop="16dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

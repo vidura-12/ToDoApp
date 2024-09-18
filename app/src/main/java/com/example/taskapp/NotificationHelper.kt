@@ -1,5 +1,6 @@
 package com.example.taskapp
 
+import Task
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
@@ -32,6 +33,20 @@ object NotificationHelper {
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_notification) // Ensure this drawable exists
             .setContentTitle("New Task Added")
+            .setContentText("Task: ${task.title}")
+            .setPriority(NotificationCompat.PRIORITY_HIGH) // Set priority to high for popups
+            .setAutoCancel(true)
+            .setVibrate(longArrayOf(1000, 1000, 1000, 1000, 1000)) // Vibration pattern
+            .setDefaults(NotificationCompat.DEFAULT_ALL) // Ensure sound, vibration, etc.
+            .build()
+
+        notificationManager.notify(1, notification)
+    }
+    fun sendNotificationDelete(context: Context, task: Task) {
+        val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val notification = NotificationCompat.Builder(context, CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_notification) // Ensure this drawable exists
+            .setContentTitle("Task Deleted")
             .setContentText("Task: ${task.title}")
             .setPriority(NotificationCompat.PRIORITY_HIGH) // Set priority to high for popups
             .setAutoCancel(true)
