@@ -9,6 +9,7 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -82,6 +83,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         viewTasksButton.setOnClickListener {
+            val intent = Intent(this, TaskListActivity::class.java)
+            startActivity(intent)
+        }
+        val imageView: ImageView = findViewById(R.id.imageView23)
+        imageView.setOnClickListener {
             val intent = Intent(this, TaskListActivity::class.java)
             startActivity(intent)
         }

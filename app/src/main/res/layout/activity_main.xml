@@ -1,98 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".MainActivity">
+    android:padding="16dp"
+    tools:context=".MainActivity"
+    >
 
-    <EditText
-        android:id="@+id/taskTitleInput"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
-        android:background="@drawable/edit_text_background"
-        android:hint="Task Title"
-        android:inputType="text"
-        android:textColor="@color/text_primary"
-        android:textColorHint="@color/text_secondary"
-        app:layout_constraintBottom_toTopOf="@+id/taskDescriptionInput"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent" />
-
-
-    <EditText
-        android:id="@+id/taskDescriptionInput"
-        android:layout_width="350dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="52dp"
-        android:background="@drawable/edit_text_background"
-        android:hint="Task Description"
-        android:inputType="text"
-        android:textColor="@color/text_primary"
-        android:textColorHint="@color/text_secondary"
-        app:layout_constraintBottom_toTopOf="@+id/taskDateInput"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/taskDateInput"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
-        android:background="@drawable/edit_text_background"
-        android:hint="Task Date (dd/MM/yyyy)"
-        android:inputType="text"
-        android:textColor="@color/text_primary"
-        android:textColorHint="@color/text_secondary"
-        app:layout_constraintBottom_toTopOf="@+id/taskTimeInput"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/taskTimeInput"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/edit_text_background"
-        android:hint="Task Time (HH:mm)"
-        android:inputType="text"
-        android:textColor="@color/text_primary"
-        android:textColorHint="@color/text_secondary"
-        app:layout_constraintBottom_toTopOf="@+id/saveTaskButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
+    <ImageView
+        android:id="@+id/imageView23"
+        android:layout_width="47dp"
+        android:layout_height="39dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.712" />
+        app:srcCompat="@drawable/back" />
 
-    <Button
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/taskTitleLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="32dp"
+        app:boxStrokeColor="@color/primary"
+        app:layout_constraintBottom_toTopOf="@+id/taskDescriptionLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MaterialComponents.TextInputLayout.Rounded"> <!-- Increased margin -->
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/taskTitleInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Task Title"
+            android:inputType="text"
+            android:textColor="@color/text_primary"
+            android:textColorHint="@color/text_secondary" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/taskDescriptionLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        app:boxStrokeColor="@color/primary"
+        app:layout_constraintBottom_toTopOf="@+id/taskDateLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/taskTitleLayout"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MaterialComponents.TextInputLayout.Rounded"> <!-- Increased margin -->
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/taskDescriptionInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Task Description"
+            android:inputType="text"
+            android:textColor="@color/text_primary"
+            android:textColorHint="@color/text_secondary" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/taskDateLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        app:boxStrokeColor="@color/primary"
+        app:layout_constraintBottom_toTopOf="@+id/taskTimeLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/taskDescriptionLayout"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MaterialComponents.TextInputLayout.Rounded"> <!-- Increased margin -->
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/taskDateInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Task Date (dd/MM/yyyy)"
+            android:inputType="text"
+            android:textColor="@color/text_primary"
+            android:textColorHint="@color/text_secondary" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/taskTimeLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
+        app:boxStrokeColor="@color/primary"
+        app:layout_constraintBottom_toTopOf="@+id/saveTaskButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/taskDateLayout"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MaterialComponents.TextInputLayout.Rounded"> <!-- Adjust as needed -->
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/taskTimeInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Task Time (HH:mm)"
+            android:inputType="text"
+            android:textColor="@color/text_primary"
+            android:textColorHint="@color/text_secondary" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/saveTaskButton"
-        android:layout_width="246dp"
-        android:layout_height="49dp"
-        android:layout_marginBottom="20dp"
-        android:backgroundTint="@color/primary_variant"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/primary"
         android:text="Save Task"
         android:textColor="@color/background"
-        app:layout_constraintBottom_toTopOf="@+id/viewTasksButton"
+        app:cornerRadius="24dp"
+        app:layout_constraintBottom_toTopOf="@id/viewTasksButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@+id/taskTimeLayout" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/viewTasksButton"
-        android:layout_width="246dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="56dp"
-        android:backgroundTint="@color/primary"
+        android:layout_marginBottom="32dp"
+        android:backgroundTint="@color/primary_variant"
         android:text="View Tasks"
         android:textColor="@color/background"
+        app:cornerRadius="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/saveTaskButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>

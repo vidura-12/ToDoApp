@@ -1,0 +1,24 @@
+<!-- res/values/styles.xml -->
+<resources>
+    <!-- Base theme for your app -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Customize your theme here -->
+    </style>
+
+    <!-- Rounded ShapeAppearance for TextInputLayout -->
+    <style name="ShapeAppearanceOverlay.MaterialComponents.TextInputLayout.Rounded" parent="">
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.MaterialComponents.LargeComponent.Rounded</item>
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.MaterialComponents.SmallComponent.Rounded</item>
+    </style>
+
+    <!-- Base style for rounded shape -->
+    <style name="ShapeAppearance.MaterialComponents.LargeComponent.Rounded">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12dp</item> <!-- Adjust the size as needed -->
+    </style>
+
+    <style name="ShapeAppearance.MaterialComponents.SmallComponent.Rounded">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+</resources>
