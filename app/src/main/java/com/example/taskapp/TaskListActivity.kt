@@ -28,14 +28,10 @@ class TaskListActivity : AppCompatActivity() {
     ) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             val updatedTask = result.data?.getParcelableExtra<Task>("updatedTask") ?: return@registerForActivityResult
-            val position = taskList.indexOfFirst { it.id == updatedTask.id }
-            if (position != -1) {
-                taskList[position] = updatedTask
-                updateTaskList()  // Refresh the task list
-            }
+            // Call the updateTask method to update the task and refresh the view
+            updateTask(updatedTask)
         }
     }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_task_list)
@@ -49,7 +45,6 @@ class TaskListActivity : AppCompatActivity() {
         // Set the LinearLayoutManager
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        // Initialize the adapter with the task list and click listeners
         taskAdapter = TaskAdapter(taskList, { position ->
             // Show confirmation dialog before deleting the task
             showDeleteConfirmationDialog(position)
@@ -59,6 +54,7 @@ class TaskListActivity : AppCompatActivity() {
             val intent = Intent(this, editTaskActivity::class.java).apply {
                 putExtra("task", task)
             }
+            // Launch the EditTaskActivity to edit the task
             editTaskResultLauncher.launch(intent)
         })
         recyclerView.adapter = taskAdapter
@@ -136,5 +132,27 @@ class TaskListActivity : AppCompatActivity() {
         // Notify the adapter about the item being removed
         taskAdapter.notifyItemRemoved(position)
     }
+    // Update a task by position and update the file
+    private fun updateTask(updatedTask: Task) {
+        // Find the task to update by ID
+        val position = taskList.indexOfFirst { it.id == updatedTask.id }
+        if (position != -1) {
+            // Update the task in the list
+            taskList[position] = updatedTask
+
+            // Update the tasks.txt file by writing the updated task list
+            openFileOutput(FILE_NAME, MODE_PRIVATE).use { fos ->
+                taskList.forEach { task ->
+                    val taskString = "${task.title} | ${task.description} | ${task.date} | ${task.time}\n"
+                    fos.write(taskString.toByteArray())
+                }
+            }
+            // Send a notification about the task deletion
+            NotificationHelper.sendNotificationEdit(this,updatedTask )
+            // Notify the adapter about the updated item
+            taskAdapter.notifyItemChanged(position)
+        }
+    }
+
 
 }

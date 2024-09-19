@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 
 class editTaskActivity : AppCompatActivity() {
@@ -12,7 +13,11 @@ class editTaskActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_task)
-
+        val imageView: ImageView = findViewById(R.id.imageView2)
+        imageView.setOnClickListener {
+            val intent = Intent(this, TaskListActivity::class.java)
+            startActivity(intent)
+        }
         val editTitle: EditText = findViewById(R.id.editTaskTitle)
         val editDescription: EditText = findViewById(R.id.editTaskDescription)
         val editDate: EditText = findViewById(R.id.editTaskDate)
@@ -31,6 +36,7 @@ class editTaskActivity : AppCompatActivity() {
         // Save the edited task
         saveButton.setOnClickListener {
             val updatedTask = Task(
+                id = task.id,
                 title = editTitle.text.toString(),
                 description = editDescription.text.toString(),
                 date = editDate.text.toString(),
