@@ -3,7 +3,6 @@ package com.example.taskapp
 import Task
 import TaskAdapter
 import android.app.Activity
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -28,35 +27,30 @@ class TaskListActivity : AppCompatActivity() {
     ) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             val updatedTask = result.data?.getParcelableExtra<Task>("updatedTask") ?: return@registerForActivityResult
-            // Call the updateTask method to update the task and refresh the view
             updateTask(updatedTask)
         }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_task_list)
 
-        // Create notification channel
-        NotificationHelper.createNotificationChannel(this)
-
         recyclerView = findViewById(R.id.taskRecyclerView)
         val addTaskButton: Button = findViewById(R.id.addTaskButton)
-        val Stopwatch: Button = findViewById(R.id.Stopwatch)
-        // Set the LinearLayoutManager
+        val stopwatchButton: Button = findViewById(R.id.Stopwatch)
+
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         taskAdapter = TaskAdapter(taskList, { position ->
-            // Show confirmation dialog before deleting the task
             showDeleteConfirmationDialog(position)
         }, { position ->
-            // Navigate to EditTaskActivity on single tap
             val task = taskList[position]
             val intent = Intent(this, editTaskActivity::class.java).apply {
                 putExtra("task", task)
             }
-            // Launch the EditTaskActivity to edit the task
             editTaskResultLauncher.launch(intent)
         })
+
         recyclerView.adapter = taskAdapter
 
         updateTaskList()
@@ -65,36 +59,37 @@ class TaskListActivity : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
-        Stopwatch.setOnClickListener {
+
+        stopwatchButton.setOnClickListener {
             val intent = Intent(this, StopWatch::class.java)
             startActivity(intent)
         }
     }
 
-    // Show a confirmation dialog for deleting a task
     private fun showDeleteConfirmationDialog(position: Int) {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Delete Task")
         builder.setMessage("Are you sure you want to delete this task?")
-
-        // Handle the positive "OK" button action
         builder.setPositiveButton("OK") { dialog, _ ->
-            deleteTask(position)  // Delete the task if OK is clicked
+            deleteTask(position)
             dialog.dismiss()
         }
-
-        // Handle the negative "Cancel" button action
         builder.setNegativeButton("Cancel") { dialog, _ ->
-            dialog.dismiss()  // Close the dialog without any action
+            dialog.dismiss()
         }
-
-        // Show the dialog
-        val alertDialog: AlertDialog = builder.create()
-        alertDialog.show()
+        builder.create().show()
     }
 
     // Update the task list from the file
     private fun updateTaskList() {
+        val file = getFileStreamPath(FILE_NAME)
+
+        // Check if the file exists before attempting to open it
+        if (!file.exists()) {
+            // If the file doesn't exist, just return
+            return
+        }
+
         taskList.clear()
         openFileInput(FILE_NAME).use { fis ->
             BufferedReader(InputStreamReader(fis)).use { reader ->
@@ -110,49 +105,34 @@ class TaskListActivity : AppCompatActivity() {
         taskAdapter.notifyDataSetChanged()
     }
 
-    // Delete a task by position and update the file
-    private fun deleteTask(position: Int) {
-        // Get the task to delete
-        val taskToDelete = taskList[position]
 
-        // Remove the task from the list
+    private fun deleteTask(position: Int) {
+        val taskToDelete = taskList[position]
         taskList.removeAt(position)
 
-        // Update the tasks.txt file by writing the new task list
+        updateTasksFile()
+        NotificationHelper.sendNotificationDelete(this, taskToDelete)
+        taskAdapter.notifyItemRemoved(position)
+    }
+
+    private fun updateTask(updatedTask: Task) {
+        val position = taskList.indexOfFirst { it.id == updatedTask.id }
+        if (position != -1) {
+            taskList[position] = updatedTask
+
+            updateTasksFile()
+            NotificationHelper.sendNotificationEdit(this, updatedTask)
+            taskAdapter.notifyItemChanged(position)
+        }
+    }
+
+    // Centralized method to write the updated task list to the file
+    private fun updateTasksFile() {
         openFileOutput(FILE_NAME, MODE_PRIVATE).use { fos ->
             taskList.forEach { task ->
                 val taskString = "${task.title} | ${task.description} | ${task.date} | ${task.time}\n"
                 fos.write(taskString.toByteArray())
             }
         }
-
-        // Send a notification about the task deletion
-        NotificationHelper.sendNotificationDelete(this, taskToDelete)
-
-        // Notify the adapter about the item being removed
-        taskAdapter.notifyItemRemoved(position)
     }
-    // Update a task by position and update the file
-    private fun updateTask(updatedTask: Task) {
-        // Find the task to update by ID
-        val position = taskList.indexOfFirst { it.id == updatedTask.id }
-        if (position != -1) {
-            // Update the task in the list
-            taskList[position] = updatedTask
-
-            // Update the tasks.txt file by writing the updated task list
-            openFileOutput(FILE_NAME, MODE_PRIVATE).use { fos ->
-                taskList.forEach { task ->
-                    val taskString = "${task.title} | ${task.description} | ${task.date} | ${task.time}\n"
-                    fos.write(taskString.toByteArray())
-                }
-            }
-            // Send a notification about the task deletion
-            NotificationHelper.sendNotificationEdit(this,updatedTask )
-            // Notify the adapter about the updated item
-            taskAdapter.notifyItemChanged(position)
-        }
-    }
-
-
 }

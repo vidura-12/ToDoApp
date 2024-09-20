@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import java.io.File
 import java.io.OutputStreamWriter
 import java.text.SimpleDateFormat
 import java.util.*
@@ -93,7 +94,17 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
+
     private fun saveTask(task: Task) {
+        val file = File(filesDir, FILE_NAME)
+
+        // Check if the file exists, if not, create it
+        if (!file.exists()) {
+            file.createNewFile()
+        }
+
+        // Now save the task to the file
         val taskString = "${task.title} | ${task.description} | ${task.date} | ${task.time}\n"
         openFileOutput(FILE_NAME, Context.MODE_APPEND).use { fos ->
             OutputStreamWriter(fos).use { writer ->
@@ -101,6 +112,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
 
     private fun showDatePicker(dateInput: EditText) {
         val calendar = Calendar.getInstance()
