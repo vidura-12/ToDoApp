@@ -1,3 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">TaskApp</string>
+    <!-- App general strings -->
+    <string name="app_name">Productivity App</string>
+
+    <!-- Stopwatch screen strings -->
+    <string name="stopwatch_time_default">00:00:00:00</string>
+    <string name="stopwatch_start">Start</string>
+    <string name="stopwatch_pause">Pause</string>
+    <string name="stopwatch_reset">Reset</string>
+
+    <!-- Task creation screen strings -->
+    <string name="task_title_hint">Task Title</string>
+    <string name="task_description_hint">Task Description</string>
+    <string name="task_date_hint">Task Date (dd/MM/yyyy)</string>
+    <string name="task_time_hint">Task Time (HH:mm)</string>
+    <string name="save_task">Save Task</string>
+    <string name="view_tasks">View Tasks</string>
+
+    <!-- Accessibility strings -->
+    <string name="back_button_description">Go Back</string>
+
+    <!-- Colors (assuming color names used) -->
+    <color name="primary">#6200EE</color>
+    <color name="primary_variant">#3700B3</color>
+    <color name="secondary">#03DAC5</color>
+    <color name="accent">#FF4081</color>
+    <color name="background">#FFFFFF</color>
+    <color name="text_primary">#000000</color>
+    <color name="text_secondary">#888888</color>
 </resources>
